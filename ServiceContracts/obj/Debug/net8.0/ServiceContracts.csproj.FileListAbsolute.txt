@@ -1,0 +1,15 @@
+D:\ExpenseTrackerSolution\ServiceContracts\bin\Debug\net8.0\ServiceContracts.deps.json
+D:\ExpenseTrackerSolution\ServiceContracts\bin\Debug\net8.0\ServiceContracts.dll
+D:\ExpenseTrackerSolution\ServiceContracts\bin\Debug\net8.0\ServiceContracts.pdb
+D:\ExpenseTrackerSolution\ServiceContracts\bin\Debug\net8.0\Entities.dll
+D:\ExpenseTrackerSolution\ServiceContracts\bin\Debug\net8.0\Entities.pdb
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.csproj.AssemblyReference.cache
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.AssemblyInfoInputs.cache
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.AssemblyInfo.cs
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.csproj.CoreCompileInputs.cache
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceC.04662A29.Up2Date
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.dll
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\refint\ServiceContracts.dll
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.pdb
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ref\ServiceContracts.dll

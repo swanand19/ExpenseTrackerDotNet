@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CategoryResponse>
+
+@{
+    ViewBag.Title = "Categories";
+}
+<form asp-controller="Categories" asp-action="CategoriesIndex" method="get">
+
+    <!-- breadcrumb starts -->
+    <div class="flex">
+        <div class="flex-1">
+            <div class="text-grey">
+                <span>Categories</span>
+                <i class="fa-solid fa-caret-right"></i>
+                <span class="text-grey">Category List</span>
+            </div>
+        </div>
+
+        <div class="flex-1 text-right">
+            <a asp-controller="Categories" asp-action="CreateCategory" class="button-link button-blue-back">Create Category</a>
+
+        </div>
+    </div>
+    <!-- breadcrumb endds -->
+
+    <div class="table-container">
+        <div class="flex">
+            <div class="flex-1">
+                <h1>Categories</h1>
+            </div>
+        </div>
+
+        <table class="table w-100 mt persons">
+
+            <thead>
+                <tr>
+                    <th>Category ID</th>
+                    <th>Category Name</th>
+                    <th>Options</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CategoryResponse category in Model)
+                {
+                    <tr>
+                        <td>@category.CategoryID</td>
+                        <td>@category.CategoryName</td>
+                        <td>
+                            <a asp-controller="Categories" asp-action="DeleteCategory" asp-route-CategoryID="@category.CategoryID" class="button-link button-red-back">Delete</a>
+                            @* /Persons/Delete/1 *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+</form>
+

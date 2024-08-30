@@ -1,0 +1,111 @@
+﻿@model ExpenseAddRequest
+
+@{
+    ViewBag.Title = "Create Expense";
+}
+
+<!-- breadcrumb starts -->
+<div class="flex">
+    <div class="flex-1">
+        <div class="text-grey">
+            <span>Categories</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span class="text-grey">Expense</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span class="text-grey">Create</span>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb ends -->
+
+
+
+<div class="form-container">
+
+    <a asp-controller="Expenses" asp-action="ExpensesIndex" class="link-hover">Back to Expenses List</a>
+
+    <h2 class="text-large">Create Expense</h2>
+
+    <form asp-controller="Expenses" asp-action="CreateExpense" method="post">
+
+        @*ExpenseValue*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="ExpenseValue" class="form-label pt">Expense Value</label>
+            </div>
+            <div class="flex-1">
+                <input asp-for="ExpenseValue" class="form-input" />
+                <span asp-validation-for="ExpenseValue" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Category*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label class="form-label" asp-for="CategoryID">Category</label>
+            </div>
+            <div class="flex-1">
+                <select asp-for="CategoryID" class="form-input" asp-items="@ViewBag.Categories">
+                    <option value="">--Please Select--</option>
+                </select>
+                <span asp-validation-for="CategoryID" class="text-red"></span>
+            </div>
+        </div>
+
+        @*ExpenseDate*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="ExpenseDate" class="form-label pt">Expense Date</label>
+            </div>
+            <div class="flex-1">
+                <input asp-for="ExpenseDate" class="form-input" />
+                <span asp-validation-for="ExpenseDate" class="text-red"></span>
+            </div>
+        </div>
+
+        @*ExpenseDescription*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="ExpenseDescription" class="form-label pt">Expense Description</label>
+            </div>
+            <div class="flex-1">
+                <textarea asp-for="ExpenseDescription" class="form-input"></textarea>
+                <span asp-validation-for="ExpenseValue" class="text-red"></span>
+            </div>
+        </div>
+
+
+        @*Submit*@
+        <div class="form-field flex">
+            <div class="w-25">
+            </div>
+            <div class="flex-1">
+                <button class="button button-green-back">Create</button>
+
+                <div asp-validation-summary="All" class="text-red"></div>
+
+                @if (ViewBag.Errors != null)
+                {
+                    <div class="text-red ml">
+                        <ul>
+                            @foreach (string error in ViewBag.Errors)
+                            {
+                                <li class="ml">@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" asp-fallback-test="window.jQuery" asp-fallback-src="~/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" asp-fallback-test="window.jQuery.validator" asp-fallback-src="~/jquery.validate.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" asp-fallback-test="window.jQuery.validator.unobstrusive" asp-fallback-src="~/jquery.validate.unobtrusive.min.js"></script>
+}

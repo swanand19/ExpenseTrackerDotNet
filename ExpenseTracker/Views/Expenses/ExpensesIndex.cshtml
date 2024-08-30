@@ -1,0 +1,99 @@
+﻿@model IEnumerable<ExpenseResponse>
+
+@{
+    ViewBag.Title = "Expenses";
+}
+<form asp-controller="Expenses" asp-action="ExpensesIndex" method="get">
+
+    <!-- breadcrumb starts -->
+    <div class="flex">
+        <div class="flex-1">
+            <div class="text-grey">
+                <span>Expenses</span>
+                <i class="fa-solid fa-caret-right"></i>
+                <span class="text-grey">Expense List</span>
+            </div>
+        </div>
+
+        <div class="flex-1 text-right">
+
+            <a asp-controller="Expenses" asp-action="CreateExpense" class="button-link button-blue-back">Add Expense</a>
+
+            @*<a asp-controller="Expenses" asp-action="PersonsPDF" class="button-link button-blue-back ml">Download as PDF</a>*@
+
+        </div>
+    </div>
+    <!-- breadcrumb endds -->
+
+    <div class="table-container">
+        <div class="flex">
+            <div class="flex-1">
+                <h1>Expenses</h1>
+            </div>
+            <div class="flex-3 text-right">
+                <label>Search by:</label>
+
+                <select class="search-dropdown" name="searchBy" style="width: 200px">
+                    @foreach (var field in ViewBag.SearchFields)
+                    {
+                        if (field.Key == ViewBag.CurrentSearchBy)
+                        {
+                            <option value="@field.Key" selected="selected">@field.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@field.Key">@field.Value</option>
+                        }
+
+                    }
+                    @* Eg: searchBy=PersonName&searchString=abc *@
+                </select>
+
+                <input type="search" id="Search" class="search-text" placeholder="Search" name="searchString" value="@ViewBag.CurrentSearchString" style="width:200px" />
+
+                <button class="search-button">Search</button>
+
+                <a asp-controller="Expenses" asp-action="ExpensesIndex" class="ml link-hover">Clear all</a>
+            </div>
+        </div>
+
+
+
+        <table class="table w-100 mt persons">
+
+            <thead>
+                <tr>
+                   <th>Category</th>
+                   <th>Expense Value</th>
+                   <th>Expense Date</th>
+                   <th>Description</th>
+                    <th>Options</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ExpenseResponse expense in Model)
+                {
+                    <tr>
+                        <td>@expense.Category</td>
+                        <td>@expense.ExpenseValue</td>
+                        <td>@expense.ExpenseDate?.ToString("dd MMM yyyy")</td>
+                        <td>@expense.ExpenseDescription</td>
+                        <td>
+                            <a asp-controller="Expenses" asp-action="EditExpense" asp-route-personID="@expense.ExpenseID" class="button-link button-blue-back">Edit</a>
+                            @* /Persons/Edit/1 *@
+
+                            <a asp-controller="Expenses" asp-action="DeleteExpense" asp-route-personID="@expense.ExpenseID" class="button-link button-red-back">Delete</a>
+                            @* /Persons/Delete/1 *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+</form>
+
