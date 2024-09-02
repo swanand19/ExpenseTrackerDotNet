@@ -64,7 +64,7 @@ namespace ExpenseTracker.Controllers
         {
             CategoryResponse? categoryResponse = await _categoriesService.GetCategoryByCategoryID(categoryUpdateRequest.CategoryID);
             if (categoryResponse == null) { return RedirectToAction("Index"); }
-            await _categoriesService.DeletePerson(categoryUpdateRequest.CategoryID);
+            await _categoriesService.DeleteCategory(categoryUpdateRequest.CategoryID);
             return RedirectToAction("CategoriesIndex");
         }
     }

@@ -13,3 +13,4 @@ D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.dll
 D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\refint\ServiceContracts.dll
 D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.pdb
 D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ref\ServiceContracts.dll
+D:\ExpenseTrackerSolution\ServiceContracts\obj\Debug\net8.0\ServiceContracts.sourcelink.json

@@ -34,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcQ3JlYXRlRXhwZW5zZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/ExpenseTrackerSolution/ExpenseTracker/Views/Expenses/DeleteExpense.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcRGVsZXRlRXhwZW5zZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ExpenseTrackerSolution/ExpenseTracker/Views/Expenses/EditExpense.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcRWRpdEV4cGVuc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ExpenseTrackerSolution/ExpenseTracker/Views/Expenses/ExpensesIndex.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhwZW5zZXNcRXhwZW5zZXNJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

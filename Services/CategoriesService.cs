@@ -45,7 +45,7 @@ namespace Services
             return category.ToCategoryResponse();
         }
 
-        public async Task<bool> DeletePerson(Guid? categoryID)
+        public async Task<bool> DeleteCategory(Guid? categoryID)
         {
             if (categoryID == null) { throw new ArgumentNullException(nameof(categoryID)); }
             Category? category = await _db.Categories

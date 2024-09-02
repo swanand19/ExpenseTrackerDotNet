@@ -138,3 +138,4 @@ D:\ExpenseTrackerSolution\ExpenseTracker\obj\Debug\net8.0\ExpenseTracker.RazorAs
 D:\ExpenseTrackerSolution\ExpenseTracker\bin\Debug\net8.0\ExpenseTracker.staticwebassets.runtime.json
 D:\ExpenseTrackerSolution\ExpenseTracker\bin\Debug\net8.0\Services.dll
 D:\ExpenseTrackerSolution\ExpenseTracker\bin\Debug\net8.0\Services.pdb
+D:\ExpenseTrackerSolution\ExpenseTracker\obj\Debug\net8.0\ExpenseTracker.sourcelink.json

@@ -1,0 +1,79 @@
+﻿@model ExpenseResponse
+
+@{
+    ViewBag.Title = "Delete Expense";
+}
+
+
+<!-- breadcrumb starts -->
+<div class="flex">
+    <div class="flex-1">
+        <div class="text-grey">
+            <span>Expenses</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span class="text-grey">Expense</span>
+            <i class="fa-solid fa-caret-right"></i>
+            <span class="text-grey">Delete</span>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb ends -->
+
+
+
+<div class="form-container">
+
+    <a asp-controller="Expenses" asp-action="ExpensesIndex" class="link-hover">Back to Expenses List</a>
+    <h2 class="text-large">Delete Expense</h2>
+    <h3>Are you sure to delete this expense?</h3>
+
+    <form asp-controller="Expenses" asp-action="DeleteExpense" method="post">
+
+        <input type="hidden" asp-for="ExpenseID" />
+
+        @*CategoryName*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="ExpenseValue" class="form-label pt">Expense Value</label>
+            </div>
+            <div class="flex-1">
+                <input asp-for="ExpenseValue" class="form-input" disabled="disabled" />
+                <span asp-validation-for="ExpenseValue" class="text-red"></span>
+            </div>
+        </div>
+
+        @*ExpenseDescription*@
+        <div class="form-field flex">
+            <div class="w-25">
+                <label asp-for="ExpenseDescription" class="form-label pt">Expense Description</label>
+            </div>
+            <div class="flex-1">
+                <textarea asp-for="ExpenseDescription" class="form-input" disabled="disabled"></textarea>
+                <span asp-validation-for="ExpenseDescription" class="text-red"></span>
+            </div>
+        </div>
+
+        @*Submit*@
+        <div class="form-field flex">
+            <div class="w-25">
+            </div>
+            <div class="flex-1">
+                <button class="button button-red-back">Delete</button>
+                <div asp-validation-summary="All" class="text-red"></div>
+                @if (ViewBag.Errors != null)
+                {
+                    <div class="text-red ml">
+                        <ul>
+                            @foreach (string error in ViewBag.Errors)
+
+                            {
+                                <li class="ml">@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </form>
+</div>

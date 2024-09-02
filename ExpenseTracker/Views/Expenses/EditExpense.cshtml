@@ -1,7 +1,7 @@
-﻿@model ExpenseAddRequest
+﻿@model ExpenseUpdateRequest
 
 @{
-    ViewBag.Title = "Create Expense";
+    ViewBag.Title = "Edit Expense";
 }
 
 <!-- breadcrumb starts -->
@@ -12,7 +12,7 @@
             <i class="fa-solid fa-caret-right"></i>
             <span class="text-grey">Expense</span>
             <i class="fa-solid fa-caret-right"></i>
-            <span class="text-grey">Create</span>
+            <span class="text-grey">Edit</span>
         </div>
     </div>
 </div>
@@ -24,10 +24,10 @@
 
     <a asp-controller="Expenses" asp-action="ExpensesIndex" class="link-hover">Back to Expenses List</a>
 
-    <h2 class="text-large">Create Expense</h2>
+    <h2 class="text-large">Edit Expense</h2>
 
     <form asp-controller="Expenses" asp-action="CreateExpense" method="post">
-
+        <input type="hidden" asp-for="ExpenseID"/>
         @*ExpenseValue*@
         <div class="form-field flex">
             <div class="w-25">
@@ -80,7 +80,7 @@
             <div class="w-25">
             </div>
             <div class="flex-1">
-                <button class="button button-green-back">Create</button>
+                <button class="button button-green-back">Update</button>
 
                 <div asp-validation-summary="All" class="text-red"></div>
 

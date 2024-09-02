@@ -2,7 +2,11 @@
 
 @{
     ViewBag.Title = "Expenses";
+    var weeksInMonth = ViewBag.WeeksInMonth;
+    var daysInMonth = ViewBag.DaysInMonth;
+    var firstDayOfWeek = ViewBag.FirstDayOfWeek;
 }
+
 <form asp-controller="Expenses" asp-action="ExpensesIndex" method="get">
 
     <!-- breadcrumb starts -->
@@ -15,6 +19,25 @@
             </div>
         </div>
 
+        <!--Total expense display-->
+        @if (ViewBag.SelectedMonth != null)
+        {
+            <div class="flex">
+                <button type="submit" name="monthOffset" value="@(ViewBag.MonthOffset - 1)" class="button-link" style="border-radius:9px; margin-right:4px; background-color:rgba(95, 255, 255, 0.105); padding:5px;">◀ Previous Month</button>
+                <div class="flex-1">
+                    <h2>Total Expenses for @ViewBag.SelectedMonth: <span>&#8377;</span>  @ViewBag.TotalExpense</h2>
+                </div>
+
+                <button type="submit" name="monthOffset" value="@(ViewBag.MonthOffset + 1)" class="button-link" style="border-radius:9px; margin-left:4px; background-color:rgba(95, 255, 255, 0.105);padding:5px;">Next Month ▶</button>
+
+            </div>
+        }
+        else
+        {
+            <div class="flex-1">
+                <h2>Total Expenses for @ViewBag.SelectedDate: @ViewBag.TotalExpense</h2>
+            </div>
+        }
         <div class="flex-1 text-right">
 
             <a asp-controller="Expenses" asp-action="CreateExpense" class="button-link button-blue-back">Add Expense</a>
@@ -23,6 +46,18 @@
 
         </div>
     </div>
+
+    <!-- Date Selector -->
+    <div class="flex mt">
+        <div class="flex-1">
+            <label for="selectedDate">Select Date:</label>
+            <input type="date" id="selectedDate" name="selectedDate" value="@ViewBag.SelectedDate" onchange="this.form.submit()" />
+        </div>
+        <div class="flex-1 text-right">
+            <button type="button" id="toggleViewButton" class="button-link button-blue-back" style="padding:5px; border-radius" onclick="toggleView()">Switch to Calendar View</button>
+        </div>
+    </div>
+
     <!-- breadcrumb endds -->
 
     <div class="table-container">
@@ -32,7 +67,6 @@
             </div>
             <div class="flex-3 text-right">
                 <label>Search by:</label>
-
                 <select class="search-dropdown" name="searchBy" style="width: 200px">
                     @foreach (var field in ViewBag.SearchFields)
                     {
@@ -56,44 +90,126 @@
                 <a asp-controller="Expenses" asp-action="ExpensesIndex" class="ml link-hover">Clear all</a>
             </div>
         </div>
+        <div id="listView">
+            <table class="table w-100 mt persons">
 
-
-
-        <table class="table w-100 mt persons">
-
-            <thead>
-                <tr>
-                   <th>Category</th>
-                   <th>Expense Value</th>
-                   <th>Expense Date</th>
-                   <th>Description</th>
-                    <th>Options</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (ExpenseResponse expense in Model)
-                {
+                <thead>
                     <tr>
-                        <td>@expense.Category</td>
-                        <td>@expense.ExpenseValue</td>
-                        <td>@expense.ExpenseDate?.ToString("dd MMM yyyy")</td>
-                        <td>@expense.ExpenseDescription</td>
-                        <td>
-                            <a asp-controller="Expenses" asp-action="EditExpense" asp-route-personID="@expense.ExpenseID" class="button-link button-blue-back">Edit</a>
-                            @* /Persons/Edit/1 *@
+                        <th>Category</th>
+                        <th>Expense Value</th>
+                        <th>Expense Date</th>
+                        <th>Description</th>
+                        <th>Options</th>
 
-                            <a asp-controller="Expenses" asp-action="DeleteExpense" asp-route-personID="@expense.ExpenseID" class="button-link button-red-back">Delete</a>
-                            @* /Persons/Delete/1 *@
-                        </td>
                     </tr>
-                }
-            </tbody>
+                </thead>
+                <tbody>
+                    @foreach (ExpenseResponse expense in Model)
+                    {
+                        <tr>
+                            <td>@expense.Category</td>
+                            <td>@expense.ExpenseValue</td>
+                            <td>@expense.ExpenseDate?.ToString("dd MMM yyyy")</td>
+                            <td>@expense.ExpenseDescription</td>
+                            <td>
+                                <a asp-controller="Expenses" asp-action="EditExpense" asp-route-ExpenseID="@expense.ExpenseID" class="button-link button-blue-back">Edit</a>
+                                @* /Persons/Edit/1 *@
 
-        </table>
+                                <a asp-controller="Expenses" asp-action="DeleteExpense" asp-route-ExpenseID="@expense.ExpenseID" class="button-link button-red-back">Delete</a>
+                                @* /Persons/Delete/1 *@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
-
-    </div>
-
+        <!-- Calendar View -->
+        <div id="calendarView" style="display: none;">
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int dayCounter = 1;
+                        for (int i = 0; i < weeksInMonth; i++)
+                        {
+                            <tr>
+                                @for (int j = 0; j < 7; j++)
+                                {
+                                    <td>
+                                        @if (dayCounter <= daysInMonth && (i > 0 || j >= firstDayOfWeek))
+                                        {
+                                            <div class="calendar-day">
+                                                <span>@dayCounter</span><br />
+                                                <span class="expense-sum">
+                                                    <!-- Display the sum of expenses for this day -->
+                                                    @if (ViewBag.DailyExpenses.ContainsKey(dayCounter))
+                                                    {
+                                                        <span>&#8377; @ViewBag.DailyExpenses[dayCounter]</span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            dayCounter++;
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
 </form>
 
+<script>
+    function toggleView() {
+        var button = document.getElementById("toggleViewButton");
+        var calendarView = document.getElementById("calendarView");
+        var listView = document.getElementById("listView");
+
+        if (calendarView.style.display === "none") {
+            calendarView.style.display = "block";
+            listView.style.display = "none";
+            button.innerText = "Switch to List View";
+        } else {
+            calendarView.style.display = "none";
+            listView.style.display = "block";
+            button.innerText = "Switch to Calendar View";
+        }
+    }
+</script>
+
+<style>
+    .calendar-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .calendar-table th, .calendar-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+    .calendar-day {
+        height: 100px;
+    }
+
+    .expense-sum {
+        font-weight: bold;
+        color: darkslategrey; /* or any color you prefer */
+        display: block;
+        margin-top: 5px;
+    }
+
+</style>

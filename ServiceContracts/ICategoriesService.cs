@@ -30,6 +30,6 @@ namespace ServiceContracts
         /// </summary>
         /// <param name="categoryID">Category ID to delete</param>
         /// <returns>Returns true if deletion is successfull, otherwise flase</returns>
-        Task<bool> DeletePerson(Guid? categoryID);
+        Task<bool> DeleteCategory(Guid? categoryID);
     }
 }
